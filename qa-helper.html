@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI+GPU市场动向问答助手</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#165DFF', // 主蓝（参考heterohub）
+            secondary: '#7B61FF', // 主紫（参考heterohub）
+            lightBlue: '#E8F3FF',
+            lightPurple: '#F0ECFF',
+            dark: '#1E293B',
+            neutral: '#F8FAFC'
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+          },
+        },
+      }
+    }
+  </script>
+  <style type="text/tailwindcss">
+    @layer utilities {
+      .gradient-bg { background: linear-gradient(135deg, #165DFF 0%, #7B61FF 100%); }
+      .gradient-text { background-clip: text; -webkit-background-clip: text; color: transparent; background-image: linear-gradient(90deg, #165DFF, #7B61FF); }
+      .chat-height { height: calc(100vh - 280px); }
+      @media (max-width: 768px) { .chat-height { height: calc(100vh - 360px); } }
+    }
+  </style>
+</head>
+<body class="bg-white text-dark min-h-screen flex flex-col">
+  <!-- 顶部导航 -->
+  <header class="gradient-bg text-white py-4 px-6 shadow-lg">
+    <div class="container mx-auto flex justify-between items-center">
+      <h1 class="text-xl md:text-2xl font-bold flex items-center">
+        <i class="fa fa-microchip mr-2"></i>AI+GPU市场问答助手
+      </h1>
+      <span class="text-sm opacity-80">聚焦行业动向 · 实时资讯解答</span>
+    </div>
+  </header>
+
+  <!-- 核心聊天区域 -->
+  <main class="flex-1 container mx-auto px-4 py-6">
+    <div class="border border-lightBlue rounded-xl overflow-hidden shadow-sm">
+      <!-- 聊天记录 -->
+      <div id="chat-container" class="chat-height overflow-y-auto p-4 space-y-6 bg-neutral">
+        <div class="flex flex-col items-center space-y-2 pt-2">
+          <div class="px-4 py-2 bg-lightPurple rounded-full text-xs text-primary/80">
+            你好！我专注解答AI行业与GPU市场相关问题，其他问题也可随时咨询 💡
+          </div>
+        </div>
+      </div>
+
+      <!-- 猜你想问 -->
+      <div class="border-t border-lightBlue p-4 bg-white">
+        <h3 class="text-sm font-medium text-dark/80 mb-3">🔍 猜你想问（点击直达）</h3>
+        <div class="flex flex-wrap gap-2">
+          <button class="ask-btn px-3 py-1 text-xs bg-lightBlue rounded-full text-primary hover:bg-primary hover:text-white transition">2026英伟达GPU新品行情</button>
+          <button class="ask-btn px-3 py-1 text-xs bg-lightBlue rounded-full text-primary hover:bg-primary hover:text-white transition">国产GPU最新进展</button>
+          <button class="ask-btn px-3 py-1 text-xs bg-lightBlue rounded-full text-primary hover:bg-primary hover:text-white transition">AI算力租赁价格走势</button>
+          <button class="ask-btn px-3 py-1 text-xs bg-lightBlue rounded-full text-primary hover:bg-primary hover:text-white transition">AMD MI300对比H100</button>
+          <button class="ask-btn px-3 py-1 text-xs bg-lightBlue rounded-full text-primary hover:bg-primary hover:text-white transition">大模型商业化落地情况</button>
+          <button class="ask-btn px-3 py-1 text-xs bg-lightBlue rounded-full text-primary hover:bg-primary hover:text-white transition">GPU缺货问题何时缓解</button>
+          <button class="ask-btn px-3 py-1 text-xs bg-lightBlue rounded-full text-primary hover:bg-primary hover:text-white transition">AI行业2026年趋势预测</button>
+          <button class="ask-btn px-3 py-1 text-xs bg-lightBlue rounded-full text-primary hover:bg-primary hover:text-white transition">算力中心建设最新政策</button>
+        </div>
+      </div>
+
+      <!-- 今日榜单 -->
+      <div class="border-t border-lightBlue p-4 bg-white">
+        <h3 class="text-sm font-medium text-dark/80 mb-3">📊 今日榜单</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="bg-lightPurple/50 rounded-lg p-3">
+            <h4 class="text-xs font-medium text-secondary mb-2 flex items-center"><i class="fa fa-fire text-secondary mr-1"></i>AI行业热搜榜</h4>
+            <ul class="space-y-1 text-xs">
+              <li class="flex items-center"><span class="w-5 text-secondary font-bold">1.</span> 国内大模型备案新增名单</li>
+              <li class="flex items-center"><span class="w-5 text-secondary/80 font-bold">2.</span> OpenAI GPT-5训练进展</li>
+              <li class="flex items-center"><span class="w-5 text-secondary/70 font-bold">3.</span> AI视频生成技术商业化</li>
+              <li class="flex items-center"><span class="w-5 text-secondary/60 font-bold">4.</span> 算力网络国家战略规划</li>
+              <li class="flex items-center"><span class="w-5 text-secondary/50 font-bold">5.</span> AI芯片国产化率提升</li>
+            </ul>
+          </div>
+          <div class="bg-lightBlue/50 rounded-lg p-3">
+            <h4 class="text-xs font-medium text-primary mb-2 flex items-center"><i class="fa fa-line-chart text-primary mr-1"></i>GPU市场热度榜</h4>
+            <ul class="space-y-1 text-xs">
+              <li class="flex items-center"><span class="w-5 text-primary font-bold">1.</span> H200显卡现货价格上涨15%</li>
+              <li class="flex items-center"><span class="w-5 text-primary/80 font-bold">2.</span> 摩尔线程MTT S40量产</li>
+              <li class="flex items-center"><span class="w-5 text-primary/70 font-bold">3.</span> AMD MI300X供货量增加</li>
+              <li class="flex items-center"><span class="w-5 text-primary/60 font-bold">4.</span> 消费级GPU降价清库存</li>
+              <li class="flex items-center"><span class="w-5 text-primary/50 font-bold">5.</span> 云GPU算力价格回落</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- 输入框 -->
+      <div class="border-t border-lightBlue p-4 bg-white">
+        <div class="flex gap-2">
+          <input 
+            type="text" 
+            id="user-input" 
+            placeholder="输入你的问题（如：英伟达H100最新价格、AI行业未来趋势...）"
+            class="flex-1 px-4 py-2 border border-lightBlue rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition"
+          >
+          <button id="send-btn" class="gradient-bg text-white px-6 py-2 rounded-lg hover:opacity-90 transition flex items-center">
+            <i class="fa fa-paper-plane mr-1"></i>发送
+          </button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- 底部版权 -->
+  <footer class="py-3 px-6 text-center text-xs text-dark/60 border-t border-lightBlue mt-6">
+    AI+GPU市场问答助手 | 聚焦行业动向 · 精准解答各类问题
+  </footer>
+
+  <script>
+    // DOM元素获取
+    const chatContainer = document.getElementById('chat-container');
+    const userInput = document.getElementById('user-input');
+    const sendBtn = document.getElementById('send-btn');
+    const askBtns = document.querySelectorAll('.ask-btn');
+
+    // AI回答库（重点侧重AI+GPU，覆盖全品类问题）
+    const aiAnswers = {
+      // GPU核心问题
+      "英伟达": "2026年英伟达主流GPU（H100/H200/A100）现货市场价格环比上涨约12%，主要受算力需求激增影响，H200单卡现货报价超8万美元，渠道供货紧张；消费级显卡RTX 5090预计Q2发布，首发价格大概率在12999元起。",
+      "amd": "AMD的MI300系列GPU在AI训练端市占率持续提升，MI300X的算力性价比优于英伟达H100，目前云服务商采购量增加，现货价格稳定在5.2万美元左右；消费级RX 7900 XT降价至4299元，性价比突出。",
+      "国产gpu": "国产GPU目前主要玩家为摩尔线程、壁仞科技、沐曦集成电路，摩尔线程MTT S40已实现量产，算力达200TOPS，适配国内主流大模型；壁仞BR100算力超H100，预计年内规模化供货，国产化替代加速。",
+      "gpu价格": "当前GPU市场呈现「高端涨、中端稳、低端降」趋势：算力卡（H100/A100）缺货涨价，消费级RTX40系列降价清库存，RX7000系列性价比拉满，国产GPU定价亲民，主打政企采购市场。",
+      // AI核心问题
+      "ai趋势": "2026年AI行业核心趋势：① 大模型从通用向垂直领域深耕（工业/医疗/金融）；② 端侧AI算力普及，手机/平板搭载轻量化大模型；③ 算力网络全国一体化建设，算力价格逐步回落；④ AI监管趋严，合规化成为企业必修课。",
+      "算力价格": "目前国内公有云GPU算力租赁价格：A100单卡小时价约3.5-4.2元，H100约6.8-8元，国产GPU算力价格仅为英伟达的1/2，性价比优势明显；随着国产算力卡量产，算力价格预计Q3开始逐步下降。",
+      "大模型": "国内大模型备案数量已超200个，头部玩家（文心一言、通义千问、智谱清言）商业化落地加速，主要变现方式为API调用、私有化部署、行业定制化方案；海外OpenAI GPT-5进入训练阶段，预计年内发布，多模态能力将大幅提升。",
+      // 通用兜底回答
+      "default": "你提出的问题我已收到，结合行业最新信息为你解答：\n当前全球AI与GPU市场处于高速发展期，英伟达、AMD等头部企业持续迭代产品，国产GPU加速突围，算力需求持续攀升的同时，行业监管与合规化也逐步完善。如果你有更具体的问题（如某款显卡参数、某类AI应用场景），我可以为你提供更精准的解答！\n\n补充小贴士：近期GPU供应链有所缓解，但高端算力卡仍处于缺货状态，建议按需采购；AI大模型的落地应用是今年的核心看点，垂直领域的定制化模型将成为主流。"
+    };
+
+    // 添加消息到聊天框
+    function addMessage(content, isUser) {
+      const messageDiv = document.createElement('div');
+      messageDiv.className = `flex ${isUser ? 'justify-end' : 'justify-start'}`;
+      const bubbleClass = isUser 
+        ? 'bg-white border border-primary text-dark p-3 rounded-lg rounded-tr-none shadow-sm max-w-[80%]' 
+        : 'bg-gradient-to-r from-primary to-secondary text-white p-3 rounded-lg rounded-tl-none shadow-sm max-w-[80%]';
+      messageDiv.innerHTML = `<div class="${bubbleClass}">${content.replace(/\n/g, '<br>')}</div>`;
+      chatContainer.appendChild(messageDiv);
+      chatContainer.scrollTop = chatContainer.scrollHeight;
+    }
+
+    // AI生成回答
+    function getAiAnswer(question) {
+      const lowerQ = question.toLowerCase();
+      for (const key in aiAnswers) {
+        if (lowerQ.includes(key) || question.includes(key)) {
+          return aiAnswers[key];
+        }
+      }
+      return aiAnswers.default;
+    }
+
+    // 发送问题逻辑
+    function sendQuestion() {
+      const question = userInput.value.trim();
+      if (!question) return;
+      // 添加用户消息
+      addMessage(question, true);
+      userInput.value = '';
+      // 加载中状态
+      const loadingDiv = document.createElement('div');
+      loadingDiv.className = 'flex justify-start';
+      loadingDiv.innerHTML = `<div class="bg-gradient-to-r from-primary to-secondary text-white p-3 rounded-lg rounded-tl-none shadow-sm max-w-[80%] text-xs">AI思考中...</div>`;
+      chatContainer.appendChild(loadingDiv);
+      chatContainer.scrollTop = chatContainer.scrollHeight;
+      // 模拟AI回复延迟
+      setTimeout(() => {
+        chatContainer.removeChild(loadingDiv);
+        addMessage(getAiAnswer(question), false);
+      }, 1200);
+    }
+
+    // 绑定事件
+    sendBtn.addEventListener('click', sendQuestion);
+    userInput.addEventListener('keypress', (e) => e.key === 'Enter' && sendQuestion());
+    askBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        userInput.value = btn.textContent;
+        sendQuestion();
+      });
+    });
+  </script>
+</body>
+</html>
