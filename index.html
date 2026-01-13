@@ -15,11 +15,21 @@
 
         <nav>
             <ul>
+                <li class="try-now-li"><a href="params.html" class="try-now-btn">参数查询</a></li>
                 <li class="try-now-li"><a href="https://iwiki.woa.com/p/4017133957?from=recent_view" target="_blank" rel="noopener noreferrer" class="try-now-btn">技术文档</a></li>
                 <li class="try-now-li"><a href="https://cloud.tencent.com/product/gpu?Is=sdk-topnav" target="_blank" rel="noopener noreferrer" class="try-now-btn">立即试用</a></li>
                 <li class="try-now-li"><a href="qa-helper.html" target="_blank" rel="noopener noreferrer" class="try-now-btn">问答助手</a></li>
             </ul>
         </nav>
+
+        <!-- 欢迎横幅 -->
+        <section class="card">
+            <h2>欢迎使用 HeteroHub</h2>
+            <p>我们提供全面的GPU参数查询、比较和市场洞察服务，帮助您快速了解和选择适合的异构计算解决方案。</p>
+            <div class="flex justify-center mt-6">
+                <a href="params.html" class="try-now-btn">立即开始查询</a>
+            </div>
+        </section>
 
         <!-- GPU市场洞察卡片 -->
         <section class="market-insight">
@@ -30,171 +40,40 @@
             </div>
         </section>
 
-        <main>
-            <section class="filters">
-                <h2>筛选条件</h2>
-                <div class="filter-group">
-                    <label for="brand">品牌：</label>
-                    <select id="brand">
-                        <option value="">全部</option>
-                        <option value="NVIDIA">NVIDIA</option>
-                        <option value="AMD">AMD</option>
-                        <option value="Intel">Intel</option>
-                        <option value="腾讯">腾讯</option>
-                        <option value="华为">华为</option>
-                        <option value="天数">天数</option>
-                        <option value="海光">海光</option>
-                        <option value="寒武纪">寒武纪</option>
-                        <option value="沐曦">沐曦</option>
-                        <option value="摩尔线程">摩尔线程</option>
-                        <option value="昆仑芯">昆仑芯</option>
-                    </select>
+        <!-- 功能介绍 -->
+        <section>
+            <h2>核心功能</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div class="card">
+                    <h3>📊 参数查询</h3>
+                    <p>提供全面的GPU参数数据库，支持按品牌、类型等多维度筛选和查询，帮助您快速找到所需的GPU信息。</p>
+                    <a href="params.html" class="try-now-btn mt-4 inline-block">开始查询</a>
                 </div>
-                
-                <div class="filter-group">
-                    <label for="type">类型：</label>
-                    <select id="type">
-                        <option value="">全部</option>
-                        <option value="训练">训练</option>
-                        <option value="推理">推理</option>
-                        <option value="渲染">渲染</option>
-                        <option value="编解码">编解码</option>
-                    </select>
+                <div class="card">
+                    <h3>🔍 参数对比</h3>
+                    <p>支持最多3个GPU型号的参数对比，直观展示各型号的性能差异，帮助您做出更明智的选择。</p>
+                    <a href="params.html#comparison" class="try-now-btn mt-4 inline-block">开始对比</a>
                 </div>
-                
-                <div class="filter-group">
-                    <label for="search">关键词搜索：</label>
-                    <input type="text" id="search" placeholder="输入GPU型号或关键词">
+                <div class="card">
+                    <h3>💡 问答助手</h3>
+                    <p>AI驱动的GPU市场动向问答助手，为您解答AI行业与GPU市场相关问题，提供实时资讯解答。</p>
+                    <a href="qa-helper.html" target="_blank" class="try-now-btn mt-4 inline-block">咨询助手</a>
                 </div>
-                
-                <button id="filter-btn">应用筛选</button>
-                <button id="reset-btn">重置筛选</button>
-            </section>
+            </div>
+        </section>
 
-            <section class="gpu-table">
-                <h2>GPU参数列表</h2>
-                <div class="table-container">
-                    <table id="gpu-list">
-                        <thead>
-                            <tr>
-                                <th>品牌</th>
-                                <th>型号</th>
-                                <th>类型</th>
-                                <th class="sortable" data-column="memoryBandwidthGBs">显存带宽 <span class="sort-indicator">↕</span></th>
-                                <th class="sortable" data-column="fp64TFlops">FP64 <span class="sort-indicator">↕</span></th>
-                                <th class="sortable" data-column="fp32TFlops">FP32 <span class="sort-indicator">↕</span></th>
-                                <th class="sortable" data-column="fp16TensorCoreTFlops">FP16 <span class="sort-indicator">↕</span></th>
-                                <th class="sortable" data-column="fp8TensorCoreTFlops">FP8 <span class="sort-indicator">↕</span></th>
-                                <th class="sortable" data-column="int8TensorCoreTOps">INT8 <span class="sort-indicator">↕</span></th>
-                                <th class="sortable" data-column="memorySizeGB">显存大小 <span class="sort-indicator">↕</span></th>
-                                <th class="sortable" data-column="maxPowerW">功耗 <span class="sort-indicator">↕</span></th>
-                            </tr>
-                        </thead>
-                        <tbody id="gpu-body">
-                            <!-- GPU数据将通过JavaScript动态生成 -->
-                        </tbody>
-                    </table>
-                </div>
-            </section>
-
-            <section class="gpu-comparison">
-                <h2>GPU参数对比</h2>
-                
-                <div class="comparison-selector">
-                    <h3>选择GPU进行对比（最多3个）</h3>
-                    <div class="gpu-selectors">
-                        <div class="gpu-selector">
-                            <label for="compare-vendor-1">GPU 1 - 品牌：</label>
-                            <select id="compare-vendor-1" class="compare-vendor">
-                                <option value="">选择品牌</option>
-                                <option value="NVIDIA">NVIDIA</option>
-                                <option value="AMD">AMD</option>
-                                <option value="Intel">Intel</option>
-                                <option value="腾讯">腾讯</option>
-                                <option value="华为">华为</option>
-                                <option value="天数">天数</option>
-                                <option value="海光">海光</option>
-                                <option value="寒武纪">寒武纪</option>
-                                <option value="沐曦">沐曦</option>
-                                <option value="摩尔线程">摩尔线程</option>
-                                <option value="昆仑芯">昆仑芯</option>
-                            </select>
-                            
-                            <label for="compare-model-1">型号：</label>
-                            <select id="compare-model-1" class="compare-model">
-                                <option value="">选择型号</option>
-                            </select>
-                            
-                            <button class="remove-gpu" data-index="1">移除</button>
-                        </div>
-                        
-                        <div class="gpu-selector">
-                            <label for="compare-vendor-2">GPU 2 - 品牌：</label>
-                            <select id="compare-vendor-2" class="compare-vendor">
-                                <option value="">选择品牌</option>
-                                <option value="NVIDIA">NVIDIA</option>
-                                <option value="AMD">AMD</option>
-                                <option value="Intel">Intel</option>
-                                <option value="腾讯">腾讯</option>
-                                <option value="华为">华为</option>
-                                <option value="天数">天数</option>
-                                <option value="海光">海光</option>
-                                <option value="寒武纪">寒武纪</option>
-                                <option value="沐曦">沐曦</option>
-                                <option value="摩尔线程">摩尔线程</option>
-                                <option value="昆仑芯">昆仑芯</option>
-                            </select>
-                            
-                            <label for="compare-model-2">型号：</label>
-                            <select id="compare-model-2" class="compare-model">
-                                <option value="">选择型号</option>
-                            </select>
-                            
-                            <button class="remove-gpu" data-index="2">移除</button>
-                        </div>
-                        
-                        <div class="gpu-selector">
-                            <label for="compare-vendor-3">GPU 3 - 品牌：</label>
-                            <select id="compare-vendor-3" class="compare-vendor">
-                                <option value="">选择品牌</option>
-                                <option value="NVIDIA">NVIDIA</option>
-                                <option value="AMD">AMD</option>
-                                <option value="Intel">Intel</option>
-                                <option value="腾讯">腾讯</option>
-                                <option value="华为">华为</option>
-                                <option value="天数">天数</option>
-                                <option value="海光">海光</option>
-                                <option value="寒武纪">寒武纪</option>
-                                <option value="沐曦">沐曦</option>
-                                <option value="摩尔线程">摩尔线程</option>
-                                <option value="昆仑芯">昆仑芯</option>
-                            </select>
-                            
-                            <label for="compare-model-3">型号：</label>
-                            <select id="compare-model-3" class="compare-model">
-                                <option value="">选择型号</option>
-                            </select>
-                            
-                            <button class="remove-gpu" data-index="3">移除</button>
-                        </div>
-                    </div>
-                    
-                    <button id="compare-btn">开始对比</button>
-                </div>
-                
-                <div id="comparison-result" class="comparison-result">
-                    <!-- 对比结果将通过JavaScript动态生成 -->
-                </div>
-            </section>
-
-        </main>
+        <!-- 技术文档链接 -->
+        <section class="card">
+            <h2>技术资源</h2>
+            <p>访问我们的技术文档，了解更多关于异构计算、GPU应用和最佳实践的信息。</p>
+            <div class="flex justify-center mt-4">
+                <a href="https://iwiki.woa.com/p/4017133957?from=recent_view" target="_blank" rel="noopener noreferrer" class="try-now-btn">查看技术文档</a>
+            </div>
+        </section>
 
         <footer>
             <p>&copy; 2026 CSIG-异构产品团队<br>powered by <a href="https://cloud.tencent.com/product/hai" target="_blank">HAI</a></p>
         </footer>
     </div>
-
-    <script src="data.js"></script>
-    <script src="app.js"></script>
 </body>
 </html>
