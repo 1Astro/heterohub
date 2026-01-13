@@ -58,7 +58,7 @@ nav ul {
 
 /* 立即试用按钮样式 */
 .try-now-li {
-    margin-left: auto;
+    /* 移除margin-left: auto，确保按钮并排显示 */
 }
 
 .try-now-btn {
