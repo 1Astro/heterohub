@@ -354,22 +354,24 @@ tr:nth-child(even) {
     margin: 20px 0;
 }
 
-.market-card {
-    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+/* 使用更具体的选择器，确保覆盖.card的默认样式 */
+.card.market-card {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
     padding: 25px;
     text-align: center;
     border-radius: 12px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
+    margin-bottom: 20px;
 }
 
-.market-card:hover {
+.card.market-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
 }
 
-.market-card h3 {
+.card.market-card h3 {
     margin-bottom: 10px;
     font-size: 1.5rem;
     color: white;
@@ -377,9 +379,10 @@ tr:nth-child(even) {
     padding-bottom: 10px;
 }
 
-.market-card p {
+.card.market-card p {
     margin-bottom: 20px;
     opacity: 0.9;
+    color: white;
 }
 
 .insight-link {
