@@ -47,12 +47,41 @@ nav {
     border-radius: 10px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
 }
-
+/* 导航样式 */
 nav ul {
     list-style: none;
     display: flex;
     justify-content: center;
     gap: 30px;
+    align-items: center;
+}
+
+/* 立即试用按钮样式 */
+.try-now-li {
+    margin-left: auto;
+}
+
+.try-now-btn {
+    background: #1890ff;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border: none;
+}
+
+.try-now-btn:hover {
+    background: #40a9ff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(24, 144, 255, 0.3);
+    text-decoration: none;
+    color: white;
+}
+
+.try-now-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(24, 144, 255, 0.3);
 }
 
 nav ul li a {
