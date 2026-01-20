@@ -179,6 +179,82 @@
                 </div>
             </section>
 
+            <!-- 刊例价查询 -->
+            <section class="price-list">
+                <h2>刊例价查询</h2>
+                
+                <div class="filters">
+                    <h3>筛选条件</h3>
+                    <div class="filter-group">
+                        <label for="price-model">机型：</label>
+                        <select id="price-model">
+                            <option value="">全部</option>
+                            <option value="V100 SXM2">V100 SXM2</option>
+                            <option value="RTX 6000">RTX 6000</option>
+                            <option value="T4">T4</option>
+                            <option value="A100-80G SXM">A100-80G SXM</option>
+                            <option value="A10">A10</option>
+                            <option value="H100 SXM">H100 SXM</option>
+                            <option value="H800 SXM">H800 SXM</option>
+                            <option value="L4">L4</option>
+                            <option value="MLU370-X9">MLU370-X9</option>
+                            <option value="910B2">910B2</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label for="price-type">类型：</label>
+                        <select id="price-type">
+                            <option value="">全部</option>
+                            <option value="训练">训练</option>
+                            <option value="推理">推理</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label for="price-region">地域：</label>
+                        <select id="price-region">
+                            <option value="">全部</option>
+                            <option value="中国">中国</option>
+                        </select>
+                    </div>
+                    
+                    <button id="price-filter-btn">应用筛选</button>
+                    <button id="price-reset-btn">重置筛选</button>
+                </div>
+                
+                <div class="price-table">
+                    <h3>刊例价列表</h3>
+                    <div class="table-container">
+                        <table id="price-list">
+                            <thead>
+                                <tr>
+                                    <th>机型</th>
+                                    <th>类型</th>
+                                    <th>机型族</th>
+                                    <th>CPU型号</th>
+                                    <th>地域</th>
+                                    <th>机型规格</th>
+                                    <th>CPU（核）</th>
+                                    <th>内存（GB）</th>
+                                    <th>GPU（卡）</th>
+                                    <th>本地盘</th>
+                                    <th>卡间互联</th>
+                                    <th>内网带宽（Gbps）</th>
+                                    <th>国内站包月刊例价（元/月，含税）</th>
+                                    <th>国内站按量刊例价（元/小时，含税）</th>
+                                    <th>国际站包月刊例价（美元/月，未税）</th>
+                                    <th>国际站按量刊例价（美元/小时，未税）</th>
+                                </tr>
+                            </thead>
+                            <tbody id="price-body">
+                                <!-- 价格数据将通过JavaScript动态生成 -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
         </main>
 
         <footer>
@@ -188,5 +264,6 @@
 
     <script src="data.js"></script>
     <script src="app.js"></script>
+    <script src="parameter-update-system.js"></script>
 </body>
 </html>
