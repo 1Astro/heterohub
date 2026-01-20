@@ -5,13 +5,16 @@ class GPUComparisonApp {
         this.sortColumn = null;
         this.sortDirection = 'asc'; // 'asc' or 'desc'
         this.selectedGPUs = [];
+        this.filteredPrices = [...priceListData];
         this.init();
     }
 
     init() {
         this.renderGPUs();
+        this.renderPrices();
         this.setupEventListeners();
         this.initComparisonFeature();
+        this.initPriceListFeature();
     }
 
     // 设置事件监听器
@@ -32,6 +35,15 @@ class GPUComparisonApp {
                 this.sortByColumn(column);
             });
         });
+    }
+
+    // 初始化价格列表功能
+    initPriceListFeature() {
+        // 价格筛选按钮
+        document.getElementById('price-filter-btn').addEventListener('click', () => this.applyPriceFilters());
+        
+        // 价格重置按钮
+        document.getElementById('price-reset-btn').addEventListener('click', () => this.resetPriceFilters());
     }
 
     // 初始化对比功能
@@ -301,6 +313,67 @@ class GPUComparisonApp {
 
         this.filteredGPUs = [...gpuData];
         this.renderGPUs();
+    }
+
+    // 渲染价格列表
+    renderPrices() {
+        const tbody = document.getElementById('price-body');
+        tbody.innerHTML = '';
+
+        if (this.filteredPrices.length === 0) {
+            tbody.innerHTML = '<tr><td colspan="16" class="empty-state">没有找到匹配的价格数据</td></tr>';
+            return;
+        }
+
+        this.filteredPrices.forEach(price => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${price.model}</td>
+                <td>${price.type}</td>
+                <td>${price.modelFamily}</td>
+                <td>${price.cpuModel}</td>
+                <td>${price.region}</td>
+                <td>${price.modelSpec}</td>
+                <td>${price.cpuCores}</td>
+                <td>${price.memoryGB}</td>
+                <td>${price.gpuCards}</td>
+                <td>${price.localStorage}</td>
+                <td>${price.interCardConnection}</td>
+                <td>${price.internalBandwidthGbps}</td>
+                <td>${price.domesticMonthlyPrice.toFixed(2)}</td>
+                <td>${price.domesticHourlyPrice.toFixed(2)}</td>
+                <td>${price.internationalMonthlyPrice.toFixed(2)}</td>
+                <td>${price.internationalHourlyPrice.toFixed(2)}</td>
+            `;
+            tbody.appendChild(row);
+        });
+    }
+
+    // 应用价格筛选条件
+    applyPriceFilters() {
+        const model = document.getElementById('price-model').value;
+        const type = document.getElementById('price-type').value;
+        const region = document.getElementById('price-region').value;
+
+        this.filteredPrices = priceListData.filter(price => {
+            const matchesModel = !model || price.model === model;
+            const matchesType = !type || price.type === type;
+            const matchesRegion = !region || price.region === region;
+
+            return matchesModel && matchesType && matchesRegion;
+        });
+
+        this.renderPrices();
+    }
+
+    // 重置价格筛选条件
+    resetPriceFilters() {
+        document.getElementById('price-model').value = '';
+        document.getElementById('price-type').value = '';
+        document.getElementById('price-region').value = '';
+
+        this.filteredPrices = [...priceListData];
+        this.renderPrices();
     }
 }
 
